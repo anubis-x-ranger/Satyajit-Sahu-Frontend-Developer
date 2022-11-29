@@ -44,7 +44,6 @@ const DataGrid = () => {
 
     useEffect(() => {
       dispatch(getCapsulesData());
-      setCurrentarr(currentCapsules)
       return () => {
       
       }
@@ -84,12 +83,12 @@ const DataGrid = () => {
         <label>Type</label>
         <select name="" id="">
           <option value="">----</option>
-          <option value="">----</option>
-          <option value="">----</option>
-          <option value="">----</option>
+          <option value="Dragon 1.0">Dragon 1.0</option>
+          <option value="Dragon 1.1">Dragon 1.1</option>
+          <option value="Dragon 2.0">Dragon 2.0</option>
         </select>
       </Flex>
-      <Capsules capsules={currentarr}/>
+      <Capsules capsules={currentCapsules}/>
       {/* Pagination */}
       <Flex>
         <button onClick={(prev)=>paginate(prev-1)}>{`<`}</button>
