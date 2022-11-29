@@ -14,23 +14,17 @@ const Flex=styled.div`
     height:30px;
     width:30px;
   }
+  
 `
 
 const DataGrid = () => {
   const [currentPage,SetCurrentPage]=useState(1);
-  const [limit,setLimit]=useState(10);
-  // const [currentarr,setCurrentarr]=useState([])
+  const [limit]=useState(10);
+  const [currentarr,setCurrentarr]=useState([]);
+  
   const dispatch=useDispatch();
   const capsules=useSelector((state)=>{return state.capsules})
     // console.log(capsules)
-    useEffect(() => {
-      dispatch(getCapsulesData())
-      
-      return () => {
-      
-      }
-    }, [currentPage])
-    
     //get current capsules
     const pageNumbers = [];
     const totalCapsules=capsules.length;
@@ -43,28 +37,45 @@ const DataGrid = () => {
     }
 
     const paginate=(val)=>{
-      if(val>0 && val<=pageNumbers.length+1){
+      // if(val>0 && val<=pageNumbers.length+1){
       SetCurrentPage(val);
-      }
+      // }
     }
 
+    useEffect(() => {
+      dispatch(getCapsulesData());
+      setCurrentarr(currentCapsules)
+      return () => {
+      
+      }
+    }, [])
+    
   return (
     <div>
       <h1>CAPSULES</h1>
       <Flex>
         <label>Status</label><select name="Capsules" id="">
           <option value="">----</option>
+          <option value="unkown">unknown</option>
+          <option value="retired">retired</option>
+          <option value="active">active</option>
         </select>
         <label>Original Launch</label>
         <select name="" id="">
-          <option value="">----</option>  
+          <option value="">----</option> 
+          <option value="">----</option>
+          <option value="">----</option>
+          <option value="">----</option> 
         </select>
         <label>Type</label>
         <select name="" id="">
           <option value="">----</option>
+          <option value="">----</option>
+          <option value="">----</option>
+          <option value="">----</option>
         </select>
       </Flex>
-      <Capsules capsules={currentCapsules}/>
+      <Capsules capsules={currentarr}/>
       {/* Pagination */}
       <Flex>
         <button onClick={(prev)=>paginate(prev-1)}>{`<`}</button>
