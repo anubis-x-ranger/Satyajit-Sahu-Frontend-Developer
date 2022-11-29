@@ -50,11 +50,25 @@ const DataGrid = () => {
       }
     }, [])
     
+
+    const filterData=(val)=>{
+      
+      if(val=="active"){
+        currentarr.filter((item)=>{
+          if(item.status=="active"){
+            return item;
+          }
+        })
+      }
+      
+    }
+    
   return (
     <div>
       <h1>CAPSULES</h1>
       <Flex>
-        <label>Status</label><select name="Capsules" id="">
+        <label>Status</label>
+        <select name="Capsules" onChange={(e)=>filterData(e.target.value)}>
           <option value="">----</option>
           <option value="unkown">unknown</option>
           <option value="retired">retired</option>
@@ -65,7 +79,7 @@ const DataGrid = () => {
           <option value="">----</option> 
           <option value="">----</option>
           <option value="">----</option>
-          <option value="">----</option> 
+          <option value="">----</option>   
         </select>
         <label>Type</label>
         <select name="" id="">

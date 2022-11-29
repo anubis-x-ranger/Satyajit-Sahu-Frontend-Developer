@@ -71,7 +71,6 @@ const Navbar = () => {
         </a>
         
         <RightMenu>
-          <a href="#">Shop</a>
           <a href="#">SPACEX</a>
           <CustomMenu onClick={() => setBurgerStatus(true)} />
         </RightMenu>
