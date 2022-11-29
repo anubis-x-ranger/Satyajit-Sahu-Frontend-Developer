@@ -19,6 +19,7 @@ const Flex=styled.div`
 const DataGrid = () => {
   const [currentPage,SetCurrentPage]=useState(1);
   const [limit,setLimit]=useState(10);
+  // const [currentarr,setCurrentarr]=useState([])
   const dispatch=useDispatch();
   const capsules=useSelector((state)=>{return state.capsules})
     // console.log(capsules)
@@ -50,7 +51,19 @@ const DataGrid = () => {
   return (
     <div>
       <h1>CAPSULES</h1>
-      
+      <Flex>
+        <label>Status</label><select name="Capsules" id="">
+          <option value="">----</option>
+        </select>
+        <label>Original Launch</label>
+        <select name="" id="">
+          <option value="">----</option>  
+        </select>
+        <label>Type</label>
+        <select name="" id="">
+          <option value="">----</option>
+        </select>
+      </Flex>
       <Capsules capsules={currentCapsules}/>
       {/* Pagination */}
       <Flex>
