@@ -19,20 +19,16 @@ const Flex=styled.div`
 
 const DataGrid = () => {
   
-  const [limit]=useState(10);
-  const [currentarr,setCurrentarr]=useState([]);
-  const [page, setPage] = useState(1)
+  
+  const [page, setPage] = useState(1);
   const dispatch=useDispatch();
   const capsules=useSelector((state)=>{return state.capsules})
-    // console.log(capsules)
+    console.log(capsules)
     //get current capsules
-    const pageNumbers = [];
-    const totalCapsules=capsules.length;
-    for(let i = 1; i <= Math.ceil(totalCapsules/limit);i++){
-      pageNumbers.push(i);
-    }
+    const pageNumbers = [1,2,3];
+    
 
-   
+    // const currentCapsules=capsules.splice(page*limit,(page*limit)+limit)
 
     useEffect(() => {
       dispatch(getCapsulesData(page));
@@ -64,11 +60,15 @@ const DataGrid = () => {
       <Capsules capsules={capsules}/>
       {/* Pagination */}
       <Flex>
-        <button onClick={(prev)=>setPage(prev-1)}>{`<`}</button>
+        <button onClick={()=>setPage(page-1)}>
+          {`<`}
+        </button>
         {pageNumbers.map((num)=>(
-          <button key={num} onClick={(num)=>setPage(num)}>{num}</button>
+          <button key={num} onClick={()=>setPage(num)}>{num}</button>
         ))}
-        <button onClick={(prev)=>setPage(prev+1)}>{`>`}</button>
+        <button onClick={()=>setPage(page+1)}>
+          {`>`}
+        </button>
       </Flex>
       
     </div>
