@@ -18,67 +18,40 @@ const Flex=styled.div`
 `
 
 const DataGrid = () => {
-  const [currentPage,SetCurrentPage]=useState(1);
+  
   const [limit]=useState(10);
   const [currentarr,setCurrentarr]=useState([]);
-  
+  const [page, setPage] = useState(1)
   const dispatch=useDispatch();
   const capsules=useSelector((state)=>{return state.capsules})
     // console.log(capsules)
     //get current capsules
     const pageNumbers = [];
     const totalCapsules=capsules.length;
-    const lastCapsule= currentPage * limit; 
-    const firstCapsule= lastCapsule - limit; 
-    const currentCapsules= capsules.slice(firstCapsule,lastCapsule); 
-
     for(let i = 1; i <= Math.ceil(totalCapsules/limit);i++){
       pageNumbers.push(i);
     }
 
-    const paginate=(val)=>{
-      // if(val>0 && val<=pageNumbers.length+1){
-      SetCurrentPage(val);
-      // }
-    }
+   
 
     useEffect(() => {
-      dispatch(getCapsulesData());
-      return () => {
+      dispatch(getCapsulesData(page));
       
-      }
-    }, [])
+    }, [page])
     
 
-    const filterData=(val)=>{
-      
-      if(val=="active"){
-        currentarr.filter((item)=>{
-          if(item.status=="active"){
-            return item;
-          }
-        })
-      }
-      
-    }
+    
     
   return (
     <div>
       <h1>CAPSULES</h1>
       <Flex>
         <label>Status</label>
-        <select name="Capsules" onChange={(e)=>filterData(e.target.value)}>
+        <select name="Capsules">
           <option value="">----</option>
           <option value="unkown">unknown</option>
           <option value="retired">retired</option>
           <option value="active">active</option>
-        </select>
-        <label>Original Launch</label>
-        <select name="" id="">
-          <option value="">----</option> 
-          <option value="">----</option>
-          <option value="">----</option>
-          <option value="">----</option>   
         </select>
         <label>Type</label>
         <select name="" id="">
@@ -88,14 +61,14 @@ const DataGrid = () => {
           <option value="Dragon 2.0">Dragon 2.0</option>
         </select>
       </Flex>
-      <Capsules capsules={currentCapsules}/>
+      <Capsules capsules={capsules}/>
       {/* Pagination */}
       <Flex>
-        <button onClick={(prev)=>paginate(prev-1)}>{`<`}</button>
+        <button onClick={(prev)=>setPage(prev-1)}>{`<`}</button>
         {pageNumbers.map((num)=>(
-          <button key={num} onClick={(num)=>paginate(num)}>{num}</button>
+          <button key={num} onClick={(num)=>setPage(num)}>{num}</button>
         ))}
-        <button onClick={(prev)=>paginate(prev+1)}>{`>`}</button>
+        <button onClick={(prev)=>setPage(prev+1)}>{`>`}</button>
       </Flex>
       
     </div>
