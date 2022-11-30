@@ -24,6 +24,7 @@ const DataGrid = () => {
   const dispatch=useDispatch();
   const capsules=useSelector((state)=>{return state.capsules})
     console.log(capsules)
+    const curr_capsules=capsules.splice(page,page+9)
     //get current capsules
     const pageNumbers = [1,2,3];
     
@@ -57,7 +58,7 @@ const DataGrid = () => {
           <option value="Dragon 2.0">Dragon 2.0</option>
         </select>
       </Flex>
-      <Capsules capsules={capsules}/>
+      <Capsules capsules={curr_capsules}/>
       {/* Pagination */}
       <Flex>
         <button onClick={()=>setPage(page-1)}>
